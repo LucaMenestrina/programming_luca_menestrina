@@ -1,0 +1,17 @@
+MENESTRINA LUCA
+
+We studied a scoring scheme to evaluate two aligned biological sequences that is based on the comparison of every single couple of monomers (bases or Aas). It assumes that a mutation in one point doesn’t influence (and is not influenced by) neighbors. Thus, the total alignment score is obtained by adding all the scores for every couple.
+The higher the total score is, the better the alignment is.
+Form a high scoring alignment we can potentially deduce that the two sequences are similar, thus they could be also evolutionary related. In the case of protein it is probable that they also have similar 3D structures.
+In order to score the single couples of monomers, we can not just check if they are conserved or they are different. An intermediate score for all similar (for example two Aas that are both positively charged) monomers should be chosen. In this way we are able to evaluate mutations in aligned sequences that are less deleterious.
+An exper biologist could build a table (substitution matrix) for all the possible couples’ scores, based on his experience.
+Over time, two substitution matrices have been derived to standardize the scoring of the alignments: PAM and BLOSUM.
+PAM is derived by evolutionary related proteins and the name means Point Accepted Mutations. There are different kinds of PAMs, depending on the number of mutations accepted. The first is PAM1, with only one mutation every 100 Aas accepted (99% sequence identity). From this are derived all the others (PAM50, PAM100, PAM250…). PAM250 has a number of mutation (250) higher than 100 because also retromutations (and multiple mutations on the same position) are counted.
+BLOSUM, instead, is empirically derived from unrelated proteins with a certain amount of similarity. For example, BLOSUM62 (the most commonly used) is derived from a set of sequences with 62% similarity.
+They are matrices of all possible combinations of AA containing the relative match score, used to evaluate every match (couple) in the alignment.
+Gaps are evaluated too: linearly or taking into account that “opening” a gap is more deleterious that enlarging an “already-opened” one.
+The Needleman and Wunsch algorithm is a dynamic programming algorithm that aligns and scores two sequences at the same time.
+It is based on the concept that the total score can be calculated incrementally just adding the score of a match or gap to the already-aligned portion of the protein. Specifically, it is employed building a matrix of values in which the value of every position is calculated from the left or top or top-left position’s values as in the scheme (on paper):
+
+Substitution matrices are used to evaluate the score of every match.
+It is necessary to record the “origin” of the values written in every “cell” in order to reconstruct the total alignment.
